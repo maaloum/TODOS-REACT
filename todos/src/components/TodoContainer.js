@@ -1,67 +1,73 @@
-import React from "react";
-import Todoslist from './TodosList'
+/* eslint-disable */
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import Todoslist from './TodosList';
 import Header from './Header';
-import InputTodo from "./InputTodo";
-import { v4 as uuidv4 } from "uuid";
+import InputTodo from './InputTodo';
+
 class TodoContainer extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       todos: [
         {
           id: uuidv4(),
-          title: "Setup development environment",
-          completed: true
+          title: 'Setup development environment',
+          completed: true,
         },
         {
           id: uuidv4(),
-          title: "Develop website and add content",
-          completed: false
+          title: 'Develop website and add content',
+          completed: false,
         },
         {
           id: uuidv4(),
-          title: "Deploy to live server",
-          completed: true
-        }
-      ]
-     };
-
+          title: 'Deploy to live server',
+          completed: true,
+        },
+      ],
+    };
   }
+
   handleChange = (id) => {
-    this.setState(prevState => ({  todos: prevState.todos.map(todo => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          completed: !todo.completed,
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
         }
-    }
-    return todo
-  }),
-}))
+        return todo;
+      }),
+    }));
   };
-  delTodo = id => {
-    this.setState({
-      todos: [ ...this.state.todos.filter(todo => {
-        return todo.id !== id;
-      })]});
+
+  delTodo = (id) => {
+    this.setState({ todos: [...this.state.todos.filter((todo) => todo.id !== id)] });
   };
-  addTodoItem = title => {
+
+  addTodoItem = (title) => {
     this.setState({
       todos: this.state.todos.concat({
         id: uuidv4(),
-        title: title,
-        completed: false
-  })})};
+        title,
+        completed: false,
+      }),
+    });
+  };
+
   setUpdate = (updatedTitle, id) => {
     this.setState({
-      todos: this.state.todos.map(todo => {
+      todos: this.state.todos.map((todo) => {
         if (todo.id === id) {
-          todo.title = updatedTitle
+          todo.title = updatedTitle;
         }
-        return todo
+        return todo;
       }),
-    })
+    });
   }
+
   render() {
     return (
       <div className="container">
@@ -79,4 +85,4 @@ class TodoContainer extends React.Component {
     );
   }
 }
-export default TodoContainer
+export default TodoContainer;
